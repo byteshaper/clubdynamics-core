@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/awesomelogfile.log</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/awesomelogfile.%d{yyyy-MM-dd}-%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>20MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>14</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="org.xnio.nio" level="ERROR" />
+    <logger name="org.jboss" level="ERROR" />
+    <logger name="org.springframework" level="INFO" />
+    <logger name="org.apache" level="ERROR" />
+    <logger name="org.eclipse" level="ERROR" />
+    <logger name="io.undertow" level="ERROR"/>
+    <logger name="org.hibernate" level="ERROR" />
+    <logger name="com.zaxxer" level="ERROR" />
+    <logger name="springfox" level="ERROR" />
+
+    <logger name="com.byteshaper" level="DEBUG" />
+
+    <root level="{root.level:-INFO}">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>
