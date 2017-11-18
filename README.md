@@ -1,0 +1,1 @@
+# clubdynamics-core
