@@ -18,7 +18,7 @@
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/awesomelogfile.%d{yyyy-MM-dd}-%i.log
+            <fileNamePattern>${LOG_PATH}/clubdynamics.%d{yyyy-MM-dd}-%i.log
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>20MB</maxFileSize>
@@ -37,7 +37,7 @@
     <logger name="com.zaxxer" level="ERROR" />
     <logger name="springfox" level="ERROR" />
 
-    <logger name="com.byteshaper" level="DEBUG" />
+    <logger name="com.clubdynamics" level="DEBUG" />
 
     <root level="{root.level:-INFO}">
         <appender-ref ref="CONSOLE" />
