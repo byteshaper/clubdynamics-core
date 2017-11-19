@@ -49,4 +49,10 @@ test {
   }
 }
 
+bootRun {
+    if (project.hasProperty('args') ) {
+        args project.args.split('\\s+')
+    }
+}
+
 task sourceJar(type: Jar) { from sourceSets.main.allJava }

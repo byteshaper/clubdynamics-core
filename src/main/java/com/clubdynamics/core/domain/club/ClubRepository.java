@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClubRepository extends CrudRepository<Club, Long> {
   
-  Optional<Club> findByNameAndUrlAlias(String name, String urlAlias);
+  Optional<Club> findByName(String clubName);
+  
+  Optional<Club> findById(long id);
 }

@@ -1,6 +1,7 @@
 package com.clubdynamics.core.domain.club;
 
 import com.clubdynamics.core.domain.user.UserService;
+import com.clubdynamics.core.exception.NotFoundException;
 import com.clubdynamics.dto.UserCreateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,11 @@ public class ClubService {
     return club;
   }
   
-  public boolean clubExists(String name, String urlAlias) {
-    return clubRepository.findByNameAndUrlAlias(name, urlAlias).isPresent();
+  public boolean clubExists(String clubName) {
+    return clubRepository.findByName(clubName).isPresent();
+  }
+  
+  public Club findClub(long clubId) {
+    return clubRepository.findById(clubId).orElseThrow(() -> new NotFoundException("No club found with id " + clubId));
   }
 }
