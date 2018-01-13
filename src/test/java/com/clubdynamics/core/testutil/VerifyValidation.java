@@ -9,6 +9,12 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
+/**
+ * Verifies validation achieved by using javax.validation annotations. 
+ * 
+ * @author Henning Schütz
+ *
+ */
 public class VerifyValidation {
 
   private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
