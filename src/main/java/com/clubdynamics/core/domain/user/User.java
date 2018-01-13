@@ -1,12 +1,14 @@
 package com.clubdynamics.core.domain.user;
 
 import com.clubdynamics.core.domain.AbstractEntity;
+import com.clubdynamics.core.domain.contact.Email;
 import com.clubdynamics.core.domain.userrole.UserRole;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -30,6 +32,10 @@ public class User extends AbstractEntity {
   
   @NotEmpty
   private String salt;
+  
+  @NotNull
+  @Embedded
+  private Email email;
   
   private boolean clubDefaultUser;
   
@@ -81,5 +87,13 @@ public class User extends AbstractEntity {
 
   public void setUserRoles(Set<UserRole> userRoles) {
     this.userRoles = userRoles;
+  }
+
+  public Email getEmail() {
+    return email;
+  }
+
+  public void setEmail(Email email) {
+    this.email = email;
   }
 }

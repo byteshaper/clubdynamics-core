@@ -1,22 +1,18 @@
 package com.clubdynamics.core.domain.contact;
 
-import com.clubdynamics.core.domain.AbstractEntity;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "phone")
-public class Phone extends AbstractEntity {
+public class Phone {
 
+  // TODO number
   @NotNull
   @Enumerated(EnumType.STRING)
   private ContactType contactType;
   
   private boolean main;
-  
+
   private String comment;
   
   public ContactType getContactType() {
@@ -42,4 +38,6 @@ public class Phone extends AbstractEntity {
   public void setMain(boolean main) {
     this.main = main;
   }
+  
+  
 }

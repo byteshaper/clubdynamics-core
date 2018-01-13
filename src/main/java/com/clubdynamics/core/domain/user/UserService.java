@@ -1,10 +1,12 @@
 package com.clubdynamics.core.domain.user;
 
 import com.clubdynamics.core.auth.CryptoUtil;
+import com.clubdynamics.core.domain.contact.ContactType;
+import com.clubdynamics.core.domain.contact.Email;
 import com.clubdynamics.core.domain.userrole.UserRole;
 import com.clubdynamics.core.domain.userrole.UserRoleService;
 import com.clubdynamics.core.exception.UnexpectedServerException;
-import com.clubdynamics.dto.UserCreateDto;
+import com.clubdynamics.dto.user.UserCreateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +41,7 @@ public class UserService {
     user.setClubId(clubId);
     user.setClubDefaultUser(defaultUser);
     user.setUsername(userCreateDto.username);
-    // TODO email
+    user.setEmail(new Email(userCreateDto.email, ContactType.valueOf(userCreateDto.emailContactType.name())));
     user.setSalt(CryptoUtil.generateSalt());
     user.setPasswordHash(CryptoUtil.encryptPassword(userCreateDto.password, user.getSalt()));
     return user;

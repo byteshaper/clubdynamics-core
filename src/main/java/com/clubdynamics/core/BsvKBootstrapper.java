@@ -2,7 +2,7 @@ package com.clubdynamics.core;
 
 import com.clubdynamics.core.auth.CryptoUtil;
 import com.clubdynamics.core.domain.club.ClubService;
-import com.clubdynamics.dto.UserCreateDto;
+import com.clubdynamics.dto.user.UserCreateDto;
 import java.util.Arrays;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;

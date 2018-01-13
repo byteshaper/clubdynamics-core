@@ -8,13 +8,13 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import com.clubdynamics.core.domain.contact.ContactType;
+import com.clubdynamics.core.domain.contact.Email;
 import com.clubdynamics.core.domain.user.User;
 import com.clubdynamics.core.domain.user.UserService;
-import com.clubdynamics.core.exception.NotFoundException;
-import com.clubdynamics.core.exception.UnexpectedServerException;
 import com.clubdynamics.core.testutil.AssertAllFieldsEqual;
-import com.clubdynamics.core.testutil.VerifyExceptions;
-import com.clubdynamics.dto.UserCreateDto;
+import com.clubdynamics.dto.contact.ContactTypeDto;
+import com.clubdynamics.dto.user.UserCreateDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,8 @@ public class ClubServiceIntegrationTest {
   
   private static final String DEFAULT_USER_EMAIL = "someone@bsv-k.de";
   
+  private static final ContactTypeDto DEFAULT_USER_EMAIL_TYPE = ContactTypeDto.PRIVATE;
+  
   private static final String DEFAULT_USER_PASSWORD = "supersecret123";
   
   @Autowired
@@ -50,6 +52,7 @@ public class ClubServiceIntegrationTest {
     defaultUser.email = DEFAULT_USER_EMAIL;
     defaultUser.password = DEFAULT_USER_PASSWORD;
     defaultUser.username = DEFAULT_USER_NAME;
+    defaultUser.emailContactType = DEFAULT_USER_EMAIL_TYPE;
     Club club = clubService.createClub(CLUB_NAME, URL_ALIAS, defaultUser);
     
     // make sure it has a valid id after creation, and all values are ok:
@@ -63,7 +66,10 @@ public class ClubServiceIntegrationTest {
     assertThat(defaultUserFromDb.getUsername(), equalTo(DEFAULT_USER_NAME));
     assertThat(defaultUserFromDb.getPasswordHash(), notNullValue());
     assertThat(defaultUserFromDb.getPasswordHash(), not(equalTo(DEFAULT_USER_PASSWORD))); // must be hashed!
-    // TODO check email
+    Email defaultUserEmailFromDb = defaultUserFromDb.getEmail();
+    assertNotNull(defaultUserEmailFromDb);
+    assertThat(defaultUserEmailFromDb.getAddress(), equalTo(DEFAULT_USER_EMAIL));
+    assertThat(defaultUserEmailFromDb.getContactType(), equalTo(ContactType.valueOf(DEFAULT_USER_EMAIL_TYPE.name())));
     
     // make sure club really exists after creation:
     assertThat(clubService.clubExists(CLUB_NAME), equalTo(true));
