@@ -1,12 +1,16 @@
 package com.clubdynamics.core.domain;
 
+import com.clubdynamics.core.domain.club.Club;
+import com.clubdynamics.core.exception.UnexpectedServerException;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 
 /**
- * Abstract superclass for all JPA-entities. 
+ * Abstract superclass for all JPA-entities, providing an unique auto-generated id and enforcing a club-id (so {@link Club} 
+ * can NOT inherit from this class).
  * 
  * @author henning.schuetz
  *
@@ -17,6 +21,9 @@ public class AbstractEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
+  
+  @NotNull
+  protected Long clubId;
 
   public long getId() {
     return id;
@@ -25,6 +32,19 @@ public class AbstractEntity {
   public void setId(long id) {
     if (this.id == 0L) {
       this.id = id;
+    }
+  }
+  
+  public long getClubId() {
+    return clubId;
+  }
+
+  public void setClubId(long clubId) {
+    
+    if(this.clubId == null) {
+      this.clubId = clubId;  
+    } else {
+      throw new UnexpectedServerException("Cannot change club-association of an entity, it's already set to " + clubId);
     }
   }
 
@@ -48,6 +68,7 @@ public class AbstractEntity {
       return false;
     }
     AbstractEntity other = (AbstractEntity) obj;
+    
     if (id != other.id) {
       return false;
     }

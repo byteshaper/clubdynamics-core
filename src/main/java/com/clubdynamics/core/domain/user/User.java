@@ -22,9 +22,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 })
 public class User extends AbstractEntity {
 
-  @NotNull
-  private Long clubId;
-
   @NotEmpty
   private String username;
   
@@ -56,14 +53,6 @@ public class User extends AbstractEntity {
 
   public void setClubDefaultUser(boolean clubDefaultUser) {
     this.clubDefaultUser = clubDefaultUser;
-  }
-
-  public long getClubId() {
-    return clubId;
-  }
-
-  public void setClubId(long clubId) {
-    this.clubId = clubId;
   }
 
   public String getUsername() {

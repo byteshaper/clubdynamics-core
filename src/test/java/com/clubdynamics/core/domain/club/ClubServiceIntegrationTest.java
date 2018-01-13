@@ -3,8 +3,17 @@ package com.clubdynamics.core.domain.club;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import com.clubdynamics.core.domain.user.User;
+import com.clubdynamics.core.domain.user.UserService;
+import com.clubdynamics.core.exception.NotFoundException;
+import com.clubdynamics.core.exception.UnexpectedServerException;
 import com.clubdynamics.core.testutil.AssertAllFieldsEqual;
+import com.clubdynamics.core.testutil.VerifyExceptions;
 import com.clubdynamics.dto.UserCreateDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +40,9 @@ public class ClubServiceIntegrationTest {
   @Autowired
   private ClubService clubService;
   
+  @Autowired
+  private UserService userService;
+  
   @Test
   public void createClub() {
     // create new club:
@@ -45,7 +57,13 @@ public class ClubServiceIntegrationTest {
     assertThat(club.getName(), equalTo(CLUB_NAME));
     assertThat(club.getUrlAlias(), equalTo(URL_ALIAS));
     
-    // TODO get user from userservice and check
+    // make sure default user was properly created:
+    User defaultUserFromDb = userService.getClubDefaultUser(club.getId());
+    assertTrue(defaultUserFromDb.isClubDefaultUser());
+    assertThat(defaultUserFromDb.getUsername(), equalTo(DEFAULT_USER_NAME));
+    assertThat(defaultUserFromDb.getPasswordHash(), notNullValue());
+    assertThat(defaultUserFromDb.getPasswordHash(), not(equalTo(DEFAULT_USER_PASSWORD))); // must be hashed!
+    // TODO check email
     
     // make sure club really exists after creation:
     assertThat(clubService.clubExists(CLUB_NAME), equalTo(true));

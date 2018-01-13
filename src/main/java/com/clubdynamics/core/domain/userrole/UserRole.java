@@ -23,9 +23,6 @@ import org.hibernate.validator.constraints.NotEmpty;
     })
 })
 public class UserRole extends AbstractEntity {
-  
-  @NotNull
-  private Long clubId;
 
   @NotEmpty
   private String name;
@@ -66,13 +63,5 @@ public class UserRole extends AbstractEntity {
   @Transient
   public void addPermission(Permission permission) {
     permissions.add(permission);
-  }
-
-  public long getClubId() {
-    return clubId;
-  }
-
-  public void setClubId(long clubId) {
-    this.clubId = clubId;
   }
 }
