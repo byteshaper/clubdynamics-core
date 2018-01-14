@@ -1,5 +1,6 @@
 package com.clubdynamics.core.domain.userrole;
 
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,15 @@ public class UserRoleService {
   private UserRoleRepository userRoleRepository;
 
   public UserRole ensureClubDefaultRole(long clubId) {
-    UserRole userRole = new UserRole();
-    userRole.setClubId(clubId);
-    userRole.setClubDefaultRole(true);
-    userRole.setName(INITIAL_NAME_DEFAULT_ROLE);
-    return userRoleRepository.save(userRole);
+    
+    Optional<UserRole> defaultUserRole = userRoleRepository.getByClubIdAndClubDefaultRole(clubId, true);
+    
+    return defaultUserRole.orElseGet(() -> {
+      UserRole userRole = new UserRole();
+      userRole.setClubId(clubId);
+      userRole.setClubDefaultRole(true);
+      userRole.setName(INITIAL_NAME_DEFAULT_ROLE);
+      return userRoleRepository.save(userRole);  
+    });
   }
 }

@@ -26,6 +26,11 @@ public class UserService {
     return userRepository.save(clubDefaultUser);
   }
   
+  public User createNormalUser(UserCreateDto userCreateDto, long clubId) {
+    User clubDefaultUser = fillUser(userCreateDto, clubId, false);
+    return userRepository.save(clubDefaultUser);
+  }
+  
   public User getClubDefaultUser(long clubId) {
     User clubDefaultUsers = userRepository.getUserByClubIdAndClubDefaultUser(clubId, true).orElse(null);
     
