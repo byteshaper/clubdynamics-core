@@ -1,7 +1,7 @@
 package com.clubdynamics.core;
 
 import com.clubdynamics.core.domain.AbstractRestIntegrationTest;
-import com.clubdynamics.dto.LoginDto;
+import com.clubdynamics.dto.login.LoginDto;
 import org.junit.Test;
 
 public class LoginRestIntegrationTest extends AbstractRestIntegrationTest {
@@ -15,7 +15,7 @@ public class LoginRestIntegrationTest extends AbstractRestIntegrationTest {
       .and().assertThat().contentType("application/json")
       .and().extract().response().as(LoginDto.class);
     
-    // TODO hier geht's weiter (14.01.2018:
+    // TODO hier geht's weiter (14.01.2018):
     // * Login-Endpoint implementieren - Response definieren
     // * JWT: Gültigkeitsdauer? Revoke? Refresh / renew?
   }

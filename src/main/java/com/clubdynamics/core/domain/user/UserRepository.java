@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends CrudRepository<User,Long>{
 
   Optional<User> getUserByClubIdAndClubDefaultUser(long clubId, boolean clubDefaultUser);
+  
+  Optional<User> getUserByUsername(String username);
 }

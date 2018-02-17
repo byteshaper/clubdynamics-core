@@ -107,7 +107,7 @@ public abstract class AbstractRestIntegrationTest {
         RESTRICTED_USERNAME, RESTRICTED_USER_PASSWORD, RESTRICTED_USER_EMAIL, CONTACT_TYPE_INIT_USERS);
     userService.createNormalUser(restrictedUser, clubId);
     
-    baseUrl = "http://localhost:" + port + "/";
+    baseUrl = "http://localhost:" + port + "/api/";
     baseUrlWithClub = baseUrl + "clubs/" + clubId + "/";
   }
   
