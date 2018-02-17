@@ -21,34 +21,41 @@ public class ClubIdFromUrlExtractorTest {
   
   @Test
   public void clubIdIsParsedFromStringWithClubIdWithin() {
-    OptionalLong clubId = clubIdFromUrlExtractor.extractClubId("/clubdynamics/api/v1/secured/clubs/7/some/other/path");
+    OptionalLong clubId = clubIdFromUrlExtractor.extractClubId("/clubdynamics/api/v1/clubs/7/some/other/path");
     assertTrue(clubId.isPresent());
     assertThat(clubId.getAsLong(), equalTo(7L));
   }
   
   @Test
   public void clubIdIsNotParsedFromShorterStringWithClubIdWithin() {
-    OptionalLong clubId = clubIdFromUrlExtractor.extractClubId("/secured/clubs/7/some/other/path");
+    OptionalLong clubId = clubIdFromUrlExtractor.extractClubId("/clubs/7/some/other/path");
     assertFalse(clubId.isPresent());
   }
   
   @Test
   public void clubIdIsParsedFromStringWithClubIdAtTheEndWithSlash() {
-    OptionalLong clubId = clubIdFromUrlExtractor.extractClubId("/clubdynamics/api/v1/secured/clubs/3/");
+    OptionalLong clubId = clubIdFromUrlExtractor.extractClubId("/clubdynamics/api/v1/clubs/3/");
+    assertTrue(clubId.isPresent());
+    assertThat(clubId.getAsLong(), equalTo(3L));
+  }
+  
+  @Test
+  public void clubIdIsParsedFromStringWithClubIdAndOtherIds() {
+    OptionalLong clubId = clubIdFromUrlExtractor.extractClubId("/clubdynamics/api/v1/clubs/3/persons/5/");
     assertTrue(clubId.isPresent());
     assertThat(clubId.getAsLong(), equalTo(3L));
   }
   
   @Test
   public void clubIdIsParsedFromStringWithClubIdAtTheEndWithoutSlash() {
-    OptionalLong clubId = clubIdFromUrlExtractor.extractClubId("/clubdynamics/api/v1/secured/clubs/5/");
+    OptionalLong clubId = clubIdFromUrlExtractor.extractClubId("/clubdynamics/api/v1/clubs/5/");
     assertTrue(clubId.isPresent());
     assertThat(clubId.getAsLong(), equalTo(5L));
   }
   
   @Test
   public void clubIdIsNotParsedWhenClubIsMissingInPath() {
-    OptionalLong clubId = clubIdFromUrlExtractor.extractClubId("/clubdynamics/api/v1/secured/persons/7/some/other/path");
+    OptionalLong clubId = clubIdFromUrlExtractor.extractClubId("/clubdynamics/api/v1/persons/7/some/other/path");
     assertFalse(clubId.isPresent());
   }
 }
