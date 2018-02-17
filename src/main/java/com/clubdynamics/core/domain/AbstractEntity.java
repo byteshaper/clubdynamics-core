@@ -23,7 +23,7 @@ public class AbstractEntity {
   private long id;
   
   @NotNull
-  protected Long clubId;
+  protected long clubId;
 
   public long getId() {
     return id;
@@ -41,7 +41,7 @@ public class AbstractEntity {
 
   public void setClubId(long clubId) {
     
-    if(this.clubId == null) {
+    if(this.clubId == 0) {
       this.clubId = clubId;  
     } else {
       throw new UnexpectedServerException("Cannot change club-association of an entity, it's already set to " + clubId);

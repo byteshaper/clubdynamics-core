@@ -19,9 +19,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * TODO RETHING ALL TESTS AND TEST for clubIdFromUrl != clubIdFromToken
+ * 17.02.2018: hier geht's weiter!
+ * 
  *
  */
 @RunWith(MockitoJUnitRunner.class)
@@ -30,7 +33,6 @@ public class JwtTokenServiceTest {
   private static final String USERNAME = "someusername";
   
   private static final long CLUB_ID = 15;
-  
   
   private Algorithm algorithm;
   
@@ -116,8 +118,15 @@ public class JwtTokenServiceTest {
     SecurityUser parsedSecurityUser = jwtTokenService.parseFromJwtToken(generatedToken, CLUB_ID);
     assertNotNull(parsedSecurityUser);
     Thread.sleep(1500); // sleep a bit longer than the expiry time
-    parsedSecurityUser = jwtTokenService.parseFromJwtToken(generatedToken, CLUB_ID);
-    assertNull(parsedSecurityUser); // now the token is not valid anymore
+    boolean userNameNotFoundException = false;
+    
+    try {
+      parsedSecurityUser = jwtTokenService.parseFromJwtToken(generatedToken, CLUB_ID);  
+    } catch(UsernameNotFoundException e) {
+      userNameNotFoundException = true;
+    }
+    
+    assertTrue(userNameNotFoundException); // now the token is not valid anymore
   }
   
   private User createUser(
@@ -133,6 +142,7 @@ public class JwtTokenServiceTest {
     user.addRole(userRoleClub);
     user.setClubDefaultUser(allClubsAdmin);
     user.setUsername(username);
+    user.setClubId(CLUB_ID);
     permissionsClub.forEach(userRoleClub::addPermission);
     return user;
   }
