@@ -11,6 +11,7 @@ public class LoginService {
   
   @Autowired
   private UserRepository userRepository;
+  private JwtTokenService jwtTokenService;
   
 
   /**
