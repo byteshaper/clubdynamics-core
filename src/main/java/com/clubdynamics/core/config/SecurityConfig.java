@@ -3,6 +3,7 @@ package com.clubdynamics.core.config;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.clubdynamics.core.auth.JwtTokenService;
 import com.clubdynamics.core.auth.Permission;
 import com.clubdynamics.core.rest.ApiPaths;
 import com.clubdynamics.core.rest.auth.JwtTokenFilter;
@@ -26,10 +27,6 @@ import org.springframework.security.web.authentication.preauth.PreAuthenticatedA
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
   
-  public static final String ROLENAME_ALL_CLUBS_ADMIN = "ALL_CLUBS_ADMIN"; // TODO change
-  
-  public static final String JWT_ISSUER = "clubdynamics";
-  
   @Autowired
   private JwtUserExtractor jwtUserExtractor;
   
@@ -50,11 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     .antMatchers(
         HttpMethod.POST, 
         ApiPaths.BASE_PATH_CLUBS + "*") // vorher /*
-    .hasAnyRole(ROLENAME_ALL_CLUBS_ADMIN)
+    .hasAnyRole(JwtTokenService.ROLENAME_ALL_CLUBS_ADMIN)
     .antMatchers(
         HttpMethod.PUT, 
         ApiPaths.BASE_PATH_CLUBS + "*") // vorher /*
-    .hasAnyRole(ROLENAME_ALL_CLUBS_ADMIN)
+    .hasAnyRole(JwtTokenService.ROLENAME_ALL_CLUBS_ADMIN)
     .antMatchers(
         HttpMethod.GET, 
         ApiPaths.BASE_PATH_CLUBS + "*") // vorher /*
@@ -62,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     .antMatchers(
         HttpMethod.GET, 
         ApiPaths.BASE_PATH_CLUBS)
-    .hasAnyRole(ROLENAME_ALL_CLUBS_ADMIN)
+    .hasAnyRole(JwtTokenService.ROLENAME_ALL_CLUBS_ADMIN)
 //    .antMatchers(
 //        HttpMethod.GET,
 //        PersonController.SUBPATH_ANT + "**")    
@@ -88,7 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   
   @Bean 
   public JWTVerifier createJWTVerifier(Algorithm algorithm) {
-    return JWT.require(algorithm).withIssuer(JWT_ISSUER).build();
+    return JWT.require(algorithm).withIssuer(JwtTokenService.JWT_ISSUER).build();
   }
   
   @Bean
@@ -105,7 +102,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   
   private static String[] toRoleStrings(Permission ...userPermissions) {
     String[] result = new String[userPermissions.length + 1];
-    result[0] = ROLENAME_ALL_CLUBS_ADMIN;
+    result[0] = JwtTokenService.ROLENAME_ALL_CLUBS_ADMIN;
     
     for(int i = 0; i < userPermissions.length; i++) {
       result[i+1] = userPermissions[i].name();

@@ -5,7 +5,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.clubdynamics.core.config.SecurityConfig;
 import com.clubdynamics.core.domain.user.User;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
@@ -21,7 +20,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class JwtTokenService {
-
+  
+  public static final String ROLENAME_ALL_CLUBS_ADMIN = "ALL_CLUBS_ADMIN"; 
+  
+  public static final String JWT_ISSUER = "clubdynamics";
+  
   private static final String CLAIM_USERNAME = "un";
   
   private static final String CLAIM_CLUB_DEFAULT_USER = "cluDefUs";
@@ -49,7 +52,7 @@ public class JwtTokenService {
   
   public String generateJwtToken(User user) {
     return JWT.create()
-        .withIssuer(SecurityConfig.JWT_ISSUER)
+        .withIssuer(JwtTokenService.JWT_ISSUER)
         .withExpiresAt(createExpireDate())
         .withClaim(CLAIM_USERNAME, user.getUsername())
         .withClaim(CLAIM_CLUB_DEFAULT_USER, user.isClubDefaultUser()) // is this really necessary at all? probably yes!

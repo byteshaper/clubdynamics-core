@@ -1,6 +1,5 @@
 package com.clubdynamics.core.auth;
 
-import com.clubdynamics.core.config.SecurityConfig;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -33,7 +32,7 @@ public class SecurityUser extends User {
   @Override
   public Collection<GrantedAuthority> getAuthorities() {
     if (clubDefaultUser) {
-      return Arrays.asList(new SimpleGrantedAuthority(SecurityConfig.ROLENAME_ALL_CLUBS_ADMIN));
+      return Arrays.asList(new SimpleGrantedAuthority(JwtTokenService.ROLENAME_ALL_CLUBS_ADMIN));
     } else {
       return toAuthorities(userPermissions);
     }

@@ -2,14 +2,12 @@ package com.clubdynamics.core.auth;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.clubdynamics.core.config.SecurityConfig;
 import com.clubdynamics.core.domain.user.User;
 import com.clubdynamics.core.domain.userrole.UserRole;
 import java.util.ArrayList;
@@ -43,7 +41,7 @@ public class JwtTokenServiceTest {
   @Before
   public void setup() throws Exception {
     algorithm = Algorithm.HMAC256("secret");
-    jwtVerifier = JWT.require(algorithm).withIssuer(SecurityConfig.JWT_ISSUER).build();
+    jwtVerifier = JWT.require(algorithm).withIssuer(JwtTokenService.JWT_ISSUER).build();
     jwtTokenService = new JwtTokenService(algorithm, jwtVerifier, 60);
   }
   
@@ -79,7 +77,7 @@ public class JwtTokenServiceTest {
     assertThat(parsedSecurityUser.getAuthorities().size(), equalTo(1));
     assertThat(
         new ArrayList<>(parsedSecurityUser.getAuthorities()).get(0).getAuthority(), 
-        equalTo(SecurityConfig.ROLENAME_ALL_CLUBS_ADMIN));
+        equalTo(JwtTokenService.ROLENAME_ALL_CLUBS_ADMIN));
   }
   
   @Test
@@ -96,7 +94,7 @@ public class JwtTokenServiceTest {
     assertThat(parsedSecurityUser.getAuthorities().size(), equalTo(1));
     assertThat(
         new ArrayList<>(parsedSecurityUser.getAuthorities()).get(0).getAuthority(), 
-        equalTo(SecurityConfig.ROLENAME_ALL_CLUBS_ADMIN));
+        equalTo(JwtTokenService.ROLENAME_ALL_CLUBS_ADMIN));
   }
   
   @Test(expected = UsernameNotFoundException.class)
