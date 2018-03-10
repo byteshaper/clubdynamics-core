@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class LoginController {
 
-  @Autowired
   
   @PostMapping(ApiPaths.LOGIN)
   public LoginResultDto login(@PathParam("clubId") @NotNull Long clubId, @RequestBody @NotNull LoginDto login) {

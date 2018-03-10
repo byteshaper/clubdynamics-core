@@ -15,7 +15,7 @@ public class LoginRestIntegrationTest extends AbstractRestIntegrationTest {
       .and().assertThat().contentType("application/json")
       .and().extract().response().as(LoginDto.class);
     
-    // TODO hier geht's weiter (14.01.2018):
+    // TODO hier geht's weiter (10.03.2018):
     // * Login-Endpoint implementieren - Response definieren
     // * JWT: Gültigkeitsdauer? Revoke? Refresh / renew?
   }

@@ -78,15 +78,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     ;
   }
   
-  @Bean
-  public Algorithm createJWTAlgorithm() throws UnsupportedEncodingException {
-    return Algorithm.HMAC256(jwtSecret);
-  }
-  
-  @Bean 
-  public JWTVerifier createJWTVerifier(Algorithm algorithm) {
-    return JWT.require(algorithm).withIssuer(JwtTokenService.JWT_ISSUER).build();
-  }
+//  @Bean
+//  public Algorithm createJWTAlgorithm() throws UnsupportedEncodingException {
+//    return Algorithm.HMAC256(jwtSecret);
+//  }
+//  
+//  @Bean 
+//  public JWTVerifier createJWTVerifier(Algorithm algorithm) {
+//    return JWT.require(algorithm).withIssuer(JwtTokenService.JWT_ISSUER).build();
+//  }
   
   @Bean
   AuthenticationProvider authenticationProvider() {

@@ -4,7 +4,9 @@ import com.clubdynamics.core.rest.ApiPaths;
 import java.util.OptionalLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ClubIdFromUrlExtractor {
   
   private static final String PATTERN_STRING = ApiPaths.BASE_PATH_CLUBS + "(\\d+?)/.*";

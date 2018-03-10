@@ -21,7 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * TODO RETHING ALL TESTS AND TEST for clubIdFromUrl != clubIdFromToken
- * 17.02.2018: hier geht's weiter!
+ * 10.03.2018: hier geht's weiter!
  * 
  *
  */
