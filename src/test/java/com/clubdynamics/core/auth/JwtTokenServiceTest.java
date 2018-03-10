@@ -99,10 +99,9 @@ public class JwtTokenServiceTest {
         equalTo(SecurityConfig.ROLENAME_ALL_CLUBS_ADMIN));
   }
   
-  @Test
+  @Test(expected = UsernameNotFoundException.class)
   public void invalidToken() {
-    SecurityUser parsedSecurityUser = jwtTokenService.parseFromJwtToken("invalidToken", CLUB_ID);
-    assertNull(parsedSecurityUser);
+    jwtTokenService.parseFromJwtToken("invalidToken", CLUB_ID);
   }
   
   @Test
