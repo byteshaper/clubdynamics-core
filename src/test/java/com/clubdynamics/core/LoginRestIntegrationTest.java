@@ -5,8 +5,8 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import com.clubdynamics.core.domain.AbstractRestIntegrationTest;
-import com.clubdynamics.dto.login.LoginDto;
-import com.clubdynamics.dto.login.LoginResultDto;
+import com.clubdynamics.dto.entity.login.LoginDto;
+import com.clubdynamics.dto.entity.login.LoginResultDto;
 import org.junit.Test;
 
 public class LoginRestIntegrationTest extends AbstractRestIntegrationTest {
@@ -15,10 +15,7 @@ public class LoginRestIntegrationTest extends AbstractRestIntegrationTest {
   public void loginDefaultUserCorrectCredentials() {
     LoginDto login = new LoginDto(DEFAULT_USERNAME, DEFAULT_USER_PASSWORD);
     
-    LoginResultDto loginResult = postToClub("login", login)
-      .then().assertThat().statusCode(200)
-      .and().assertThat().contentType("application/json")
-      .and().extract().response().as(LoginResultDto.class);
+    LoginResultDto loginResult = login(login);
     
     assertThat(loginResult, notNullValue());
     assertThat(loginResult.jwtToken, notNullValue());

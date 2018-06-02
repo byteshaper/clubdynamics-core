@@ -2,7 +2,7 @@ package com.clubdynamics.core.domain.club;
 
 import com.clubdynamics.core.domain.user.UserService;
 import com.clubdynamics.core.exception.NotFoundException;
-import com.clubdynamics.dto.user.UserCreateDto;
+import com.clubdynamics.dto.entity.user.UserCreateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

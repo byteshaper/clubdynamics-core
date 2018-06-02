@@ -4,9 +4,12 @@ import static io.restassured.RestAssured.given;
 
 import com.clubdynamics.core.domain.club.ClubService;
 import com.clubdynamics.core.domain.user.UserService;
-import com.clubdynamics.dto.contact.ContactTypeDto;
-import com.clubdynamics.dto.user.UserCreateDto;
+import com.clubdynamics.dto.entity.contact.ContactTypeDto;
+import com.clubdynamics.dto.entity.login.LoginDto;
+import com.clubdynamics.dto.entity.login.LoginResultDto;
+import com.clubdynamics.dto.entity.user.UserCreateDto;
 import io.restassured.http.ContentType;
+import io.restassured.http.Header;
 import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -123,7 +126,26 @@ public abstract class AbstractRestIntegrationTest {
    * @return
    */
   protected Response postToClub(String pathAfterClub, Object payload) {
-    System.out.println("Posting to : " + baseUrlWithClub + pathAfterClub);
+    System.out.println("Posting unauthorized to : " + baseUrlWithClub + pathAfterClub);
     return given().contentType(ContentType.JSON).with().body(payload).post(baseUrlWithClub + pathAfterClub);
+  }
+  
+  protected <R> R loginAndPostToClubSuccess(String pathAfterClub, Object payload, LoginDto login, Class<R> returnType) {
+    LoginResultDto loginResult = login(login);
+    return given()
+        .contentType(ContentType.JSON)
+        .with().header(new Header("Authorization", "Bearer " + loginResult.jwtToken))
+        .with().body(payload)
+        .post(baseUrlWithClub + pathAfterClub)
+        .then().assertThat().statusCode(200)
+        .and().assertThat().contentType("application/json")
+        .and().extract().response().as(returnType);
+  }
+  
+  protected LoginResultDto login(LoginDto login) {
+    return postToClub("login", login)
+    .then().assertThat().statusCode(200)
+    .and().assertThat().contentType("application/json")
+    .and().extract().response().as(LoginResultDto.class);
   }
 }

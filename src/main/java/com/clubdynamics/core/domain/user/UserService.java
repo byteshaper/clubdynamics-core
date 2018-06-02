@@ -6,7 +6,7 @@ import com.clubdynamics.core.domain.contact.Email;
 import com.clubdynamics.core.domain.userrole.UserRole;
 import com.clubdynamics.core.domain.userrole.UserRoleService;
 import com.clubdynamics.core.exception.UnexpectedServerException;
-import com.clubdynamics.dto.user.UserCreateDto;
+import com.clubdynamics.dto.entity.user.UserCreateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

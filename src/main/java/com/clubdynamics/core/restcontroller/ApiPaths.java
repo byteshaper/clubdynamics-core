@@ -1,4 +1,4 @@
-package com.clubdynamics.core.rest;
+package com.clubdynamics.core.restcontroller;
 
 /**
  * Class where the endpoint paths for the REST-API are defined. 
@@ -15,4 +15,6 @@ public class ApiPaths {
   public static final String BASE_PATH_CLUB_ID = BASE_PATH_CLUBS + "{clubId}";
   
   public static final String LOGIN = BASE_PATH_CLUB_ID + "/login";
+  
+  public static final String PERSON_CREATE = BASE_PATH_CLUB_ID + "/persons";
 }

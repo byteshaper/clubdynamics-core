@@ -1,6 +1,6 @@
-package com.clubdynamics.core.rest.auth;
+package com.clubdynamics.core.restcontroller.auth;
 
-import com.clubdynamics.core.rest.ApiPaths;
+import com.clubdynamics.core.restcontroller.ApiPaths;
 import java.util.OptionalLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

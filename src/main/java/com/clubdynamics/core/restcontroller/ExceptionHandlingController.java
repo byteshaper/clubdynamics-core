@@ -1,4 +1,4 @@
-package com.clubdynamics.core.rest;
+package com.clubdynamics.core.restcontroller;
 
 import com.clubdynamics.core.exception.InvalidCredentialsException;
 import java.io.IOException;

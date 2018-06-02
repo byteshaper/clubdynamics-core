@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
+import com.clubdynamics.core.restcontroller.auth.JwtTokenExtractor;
 import javax.servlet.http.HttpServletRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;

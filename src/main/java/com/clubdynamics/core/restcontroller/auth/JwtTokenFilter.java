@@ -1,4 +1,4 @@
-package com.clubdynamics.core.rest.auth;
+package com.clubdynamics.core.restcontroller.auth;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;

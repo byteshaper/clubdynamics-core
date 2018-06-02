@@ -3,6 +3,9 @@ package com.clubdynamics.core.rest.auth;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+
+import com.clubdynamics.core.restcontroller.auth.ClubIdFromUrlExtractor;
+
 import static org.junit.Assert.assertFalse;
 
 import java.util.OptionalLong;

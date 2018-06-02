@@ -1,6 +1,6 @@
 package com.clubdynamics.core.exception;
 
-import com.clubdynamics.dto.login.LoginDto;
+import com.clubdynamics.dto.entity.login.LoginDto;
 
 /**
  * To be thrown when login attempt fails due to invalid credentials provided by the user.

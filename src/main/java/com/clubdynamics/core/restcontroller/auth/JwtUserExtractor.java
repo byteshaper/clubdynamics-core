@@ -1,4 +1,4 @@
-package com.clubdynamics.core.rest.auth;
+package com.clubdynamics.core.restcontroller.auth;
 
 import com.clubdynamics.core.auth.JwtTokenService;
 import javax.servlet.http.HttpServletRequest;
