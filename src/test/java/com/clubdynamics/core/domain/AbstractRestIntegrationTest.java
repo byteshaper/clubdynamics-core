@@ -78,7 +78,7 @@ public abstract class AbstractRestIntegrationTest {
   /**
    * ID of the club created at the beginning.
    */
-  protected long clubId;
+  protected Long clubId;
   
   @Autowired
   private ClubService clubService;  
@@ -99,16 +99,18 @@ public abstract class AbstractRestIntegrationTest {
   @Before
   public void setupClubAndUsers() {
     
-    UserCreateDto defaultUser = new UserCreateDto(
-        DEFAULT_USERNAME, DEFAULT_USER_PASSWORD, DEFAULT_USER_EMAIL, CONTACT_TYPE_INIT_USERS);
-    clubId = clubService.createClub(CLUB_NAME, URL_ALIAS, defaultUser).getId();
-    
-    UserCreateDto restrictedUser = new UserCreateDto(
-        RESTRICTED_USERNAME, RESTRICTED_USER_PASSWORD, RESTRICTED_USER_EMAIL, CONTACT_TYPE_INIT_USERS);
-    userService.createNormalUser(restrictedUser, clubId);
-    
-    baseUrl = "http://localhost:" + port + "/clubdynamics/api/v1";
-    baseUrlWithClub = baseUrl + "clubs/" + clubId + "/";
+    if(true) {
+      UserCreateDto defaultUser = new UserCreateDto(
+          DEFAULT_USERNAME, DEFAULT_USER_PASSWORD, DEFAULT_USER_EMAIL, CONTACT_TYPE_INIT_USERS);
+      clubId = clubService.createClub(CLUB_NAME, URL_ALIAS, defaultUser).getId();
+      
+      UserCreateDto restrictedUser = new UserCreateDto(
+          RESTRICTED_USERNAME, RESTRICTED_USER_PASSWORD, RESTRICTED_USER_EMAIL, CONTACT_TYPE_INIT_USERS);
+      userService.createNormalUser(restrictedUser, clubId);
+      
+      baseUrl = "http://localhost:" + port + "/clubdynamics/api/v1/";
+      baseUrlWithClub = baseUrl + "clubs/" + clubId + "/";
+    }
   }
   
   /**

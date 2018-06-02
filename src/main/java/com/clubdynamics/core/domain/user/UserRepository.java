@@ -9,5 +9,5 @@ public interface UserRepository extends CrudRepository<User,Long>{
 
   Optional<User> getUserByClubIdAndClubDefaultUser(long clubId, boolean clubDefaultUser);
   
-  Optional<User> getUserByUsername(String username);
+  Optional<User> getUserByClubIdAndUsername(long clubId, String username);
 }

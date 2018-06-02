@@ -9,20 +9,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginService {
   
-  @Autowired
+	@Autowired
   private UserRepository userRepository;
+  
+	@Autowired
   private JwtTokenService jwtTokenService;
   
 
   /**
    * Tries to login user. 
    * 
+   * @param clubId clubId
    * @param username username
    * @param password password (plaintext)
    * @return optional JWT token in case of success, empty otherwise (username not found or wrong password)
    */
-  public Optional<String> login(String username, String password) {
-    Optional<User> optionalUser = userRepository.getUserByUsername(username);
+  public Optional<String> login(long clubId, String username, String password) {
+    Optional<User> optionalUser = userRepository.getUserByClubIdAndUsername(clubId, username);
     
     if(optionalUser.isPresent()) {
       User user = optionalUser.get();

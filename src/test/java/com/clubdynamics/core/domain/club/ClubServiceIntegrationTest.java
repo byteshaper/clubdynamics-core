@@ -22,6 +22,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+/**
+ * Clubs are not created / updated etc. via REST-interface at the moment so no RestIntegrationtest needed...
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
